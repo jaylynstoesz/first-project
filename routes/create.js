@@ -2,7 +2,6 @@ var express = require('express');
 var router = express.Router();
 var lib = require('../lib/lib');
 var jsdom = require('jsdom');
-var page = require('../lib/page');
 
 /* GET Create page. */
 router.get('/create', function(req, res, next) {
@@ -23,7 +22,6 @@ router.post('/create', function(req, res, next) {
     url,
     ["http://code.jquery.com/jquery.js"],
     function (errors, window) {
-      // (lib.getKeywords(window.$("p").text()));
       res.render('create/index', {article: article, suggestions: (lib.getKeywords(window.$("p").text()))});
     }
   );

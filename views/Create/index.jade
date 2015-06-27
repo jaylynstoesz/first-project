@@ -5,9 +5,6 @@ block content
     a(href="/logout") Log Out
   h1 Create new tweet page
   form(method="post" action="/create")
-    label(for="article") Paste article here:
-    br
-    textarea(name="article" id="article" rows="10" cols="30") #{article}
     div
       label(for="url") URL: 
       br
@@ -18,5 +15,5 @@ block content
     for each in suggestions
       .hashtags
         if (each)
-        p ##{each}
+          a(href="#") ##{each}
     

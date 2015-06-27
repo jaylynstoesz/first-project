@@ -10,10 +10,19 @@ a {
 .hashtags {
   display: inline-block;
   width: auto;
-  padding-left: 10px;
-  padding-right: 10px;
   margin: 10px;
   background-color: pink;
   border: 1px solid black;
   border-radius: 5px;
+}
+
+.hashtags>a {
+  display: inline-block;
+  color: black;
+  text-decoration: none;
+  padding: 10px;
+}
+
+.hashtags:hover {
+  background-color: aqua;
 }
