@@ -1,0 +1,19 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+.hashtags {
+  display: inline-block;
+  width: auto;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin: 10px;
+  background-color: pink;
+  border: 1px solid black;
+  border-radius: 5px;
+}
