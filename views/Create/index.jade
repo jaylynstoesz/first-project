@@ -16,14 +16,20 @@ block content
         br
         br
       div
-        input(type="submit" name="submit" id="submit" value="Submit")
+        input(type="submit" name="submit" id="submit" value="Preview Tweet")
       br
       br
-    div
-      if suggestions
-        .results
+      #results
+        if suggestions
           for each in suggestions
-            .hashtags
-              if (each)
-                span(href="#") ##{each}
+            a.hashtag(href="#" id=each) ##{each}
+
+  .sidebar
+    p Preview and edit your Tweet:
+    textarea(id="prevWindow" name="preview")
+      !{title} 
+    !{urlTrim}
+    .charCount
+  script(src='/javascripts/dom.js')    
+      
     

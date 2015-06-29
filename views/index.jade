@@ -7,9 +7,10 @@ block content
     h2 Create a new account
     form(method="post" action="/signup")
       div
-        label(for="email") Email: 
+        label(for="handle") Twitter Handle: 
         br
-        input(type="email" name="email" id="email" value=email)
+        span @ 
+        input(type="text" name="handle" id="handle" value=handle)
       div
         label(for="password") Password:
         br
@@ -24,15 +25,17 @@ block content
     h2 Or log into an existing account
     form(method="post" action="/login")
       div
-        label(for="emailEx") Email: 
+        label(for="handleEx") Twitter Handle: 
         br
-        input(type="email" name="emailEx" id="emailEx" value=emailEx)
+        span @ 
+        input(type="text" name="handleEx" id="handleEx" value=handleEx)
       div
         label(for="passwordEx") Password:
         br
         input(type="password" name="passwordEx" id="passwordEx")
       div
         input(type="submit" name="submit" id="submit" value="Log In")
+  .center
     if errors
       for message in errors
         p= message

@@ -12,22 +12,22 @@ router.get('/', function(req, res, next) {
 
 // post to signup page
 router.post('/signup', function(req, res, next) {
-  var email = req.body.email;
+  var handle = req.body.handle;
   var password = req.body.password;
   var confirm = req.body.confirm;
   var hash = bcrypt.hashSync(req.body.password, 10);
 
-  userCollection.findOne({user: email}, function(err, record) {
-    var errorsList = lib.errorGen(email, password, confirm);
+  userCollection.findOne({user: handle}, function(err, record) {
+    var errorsList = lib.errorGen(handle, password, confirm);
     if (record !== null) {
-      var emailErr = "That email is already taken.";
-      errorsList.push(emailErr);
+      var handleErr = "That handle is already taken.";
+      errorsList.push(handleErr);
     }
     if (errorsList.length !== 0) {
-      res.render('index', {errors: errorsList, email: email});
+      res.render('index', {errors: errorsList, handle: handle});
     } else {
-      res.cookie('user_name', email);
-      userCollection.insert({user: email, password: hash});
+      res.cookie('user_name', handle);
+      userCollection.insert({user: handle, password: hash});
       res.redirect('/create');
     }
   });
@@ -35,17 +35,17 @@ router.post('/signup', function(req, res, next) {
 
 // log into existing account
 router.post('/login', function(req, res, next) {
-  var emailEx = req.body.emailEx;
+  var handleEx = req.body.handleEx;
   var passwordEx = req.body.passwordEx;
-  userCollection.findOne({user: emailEx}, function (err, record) {
+  userCollection.findOne({user: handleEx}, function (err, record) {
     if (record === null) {
-      res.render('index', {emailEx: emailEx, msg: "That email doesn't match our records. Please try again."});
+      res.render('index', {handleEx: handleEx, msg: "That Twitter handle doesn't match our records. Please try again."});
     } else {
       if (bcrypt.compareSync(passwordEx, record.password)) {
-        res.cookie('user_name', emailEx);
+        res.cookie('user_name', handleEx);
         res.redirect('/create');
       } else {
-        res.render('index', {msg: "Oops! Your password didn't match. Please try again.", emailEx: emailEx});
+        res.render('index', {msg: "Oops! Your password didn't match. Please try again.", handleEx: handleEx});
       }
     }
   });
