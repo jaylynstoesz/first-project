@@ -19,7 +19,7 @@ router.get('/logout', function(req, res, next) {
 router.post('/create', function(req, res, next) {
   var article = req.body.article;
   var url = req.body.url;
-  var urlTrim = url.substring(0, 20) + "...";
+  var urlTrim = url.substring(0, 30) + "...";
   jsdom.env(
     url,
     ["http://code.jquery.com/jquery.js"],

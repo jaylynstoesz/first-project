@@ -21,15 +21,16 @@ block content
       br
       #results
         if suggestions
+          p Add some hashtags to your Tweet
           for each in suggestions
             a.hashtag(href="#" id=each) ##{each}
 
   .sidebar
     p Preview and edit your Tweet:
-    textarea(id="prevWindow" name="preview")
+    textarea(id="prevWindow" name="preview" maxLength="138")
       !{title} 
-    !{urlTrim}
-    .charCount
+    p !{urlTrim}
+    p#charCount
   script(src='/javascripts/dom.js')    
       
     
