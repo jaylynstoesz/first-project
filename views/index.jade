@@ -1,40 +1,40 @@
 extends layout
 
 block content
-  div
-    h1 Sign up for TweetHelper
-  div
+  .main
+    h1 Welcome to TweetHelper!
+  .left
     h2 Create a new account
-  form(method="post" action="/signup")
-    div
-      label(for="email") Email: 
-      br
-      input(type="email" name="email" id="email" value=email)
-    div
-      label(for="password") Password:
-      br
-      input(type="password" name="password" id="password")
-    div
-      label(for="confirm") Retype password:
-      br
-      input(type="password" name="confirm" id="confirm")
-    div
-      input(type="submit" name="submit" is="submit" value="Create Account")
-  div
-    h2 Log into an existing account
-  form(method="post" action="/login")
-    div
-      label(for="emailEx") Email: 
-      br
-      input(type="email" name="emailEx" id="emailEx" value=emailEx)
-    div
-      label(for="passwordEx") Password:
-      br
-      input(type="password" name="passwordEx" id="passwordEx")
-    div
-      input(type="submit" name="submit" is="submit" value="Log In")
-  if errors
-    for message in errors
-      p= message
-  if msg
-    p= msg
+    form(method="post" action="/signup")
+      div
+        label(for="email") Email: 
+        br
+        input(type="email" name="email" id="email" value=email)
+      div
+        label(for="password") Password:
+        br
+        input(type="password" name="password" id="password")
+      div
+        label(for="confirm") Retype password:
+        br
+        input(type="password" name="confirm" id="confirm")
+      div
+        input(type="submit" name="submit" id="submit" value="Create Account")
+  .right
+    h2 Or log into an existing account
+    form(method="post" action="/login")
+      div
+        label(for="emailEx") Email: 
+        br
+        input(type="email" name="emailEx" id="emailEx" value=emailEx)
+      div
+        label(for="passwordEx") Password:
+        br
+        input(type="password" name="passwordEx" id="passwordEx")
+      div
+        input(type="submit" name="submit" id="submit" value="Log In")
+    if errors
+      for message in errors
+        p= message
+    if msg
+      p= msg

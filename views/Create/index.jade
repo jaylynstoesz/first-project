@@ -1,19 +1,29 @@
 extends ../layout
 
 block content
-  div
+  .nav
+    a(href="/") Edit Profile
     a(href="/logout") Log Out
-  h1 Create new tweet page
-  form(method="post" action="/create")
-    div
-      label(for="url") URL: 
+  .main
+    h1 Welcome!
+    form(method="post" action="/create")
+      div
+        label#url(for="url") Enter a URL to get started: 
+        br
+        br
+        div
+          input(type="text" name="url" id="url" autofocus)
+        br
+        br
+      div
+        input(type="submit" name="submit" id="submit" value="Submit")
       br
-      input(type="text" name="url" id="url")
+      br
     div
-      input(type="submit" name="submit" id="submit" value="Submit")
-  if suggestions
-    for each in suggestions
-      .hashtags
-        if (each)
-          a(href="#") ##{each}
+      if suggestions
+        .results
+          for each in suggestions
+            .hashtags
+              if (each)
+                span(href="#") ##{each}
     
