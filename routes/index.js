@@ -12,7 +12,7 @@ router.get('/', function(req, res, next) {
 
 // view security question
 router.get('/forgot', function(req, res, next) {
-  res.render('forgot', { title: 'Twitter Project' });
+  res.render('forgot');
 });
 
 // answer security question
@@ -39,9 +39,13 @@ router.get('/reset', function(req, res, next) {
 // reset password and redirect to dashboard
 router.post('/reset', function(req, res, next) {
   var id = req.cookies.id;
-  var hash = bcrypt.hashSync(req.body.password, 10);
-  userCollection.update({user: id}, {$set: {user: id, password: hash}});
-  res.redirect('/create');
+  if (req.body.password.length < 8) {
+    res.render('reset', {msg: "Password must be at least 8 characters."});
+  } else {
+    var hash = bcrypt.hashSync(req.body.password, 10);
+    userCollection.update({user: id}, {$set: {user: id, password: hash}});
+    res.redirect('/create');
+  }
 });
 
 // post to signup page

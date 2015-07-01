@@ -11,20 +11,16 @@ block content
         input(type="text" name="handle" id="handle" value=id)
         br
       div
-        label(for="password") New Password:
+        label(for="answer") Security question: in what city were you born?
+        input(type="text" name="answer" id="answer" value=answer)
+        br
+      div
+        label(for="password") Password (required to update login information):
         input(type="password" name="password" id="password")
         br
       div
-        label(for="confirm") Retype new password:
+        label(for="confirm") Retype password:
         input(type="password" name="confirm" id="confirm")
-        br
-      div
-        label(for="question") Your security question:
-        input(type="text" name="question" id="question" value=question)
-        br
-      div
-        label(for="answer") Answer to your security question:
-        input(type="text" name="answer" id="answer" value=answer)
         br
       div
         input(type="submit" name="submit" id="login" value="Update Login Information")

@@ -10,7 +10,6 @@ var bcrypt = require('bcryptjs');
 
 /* GET Create page. */
 router.get('/create', function(req, res, next) {
-
   res.render('create/index');
 });
 
@@ -41,7 +40,10 @@ router.get('/profile', function(req, res, next) {
   var id = req.cookies.id;
   var company = req.cookies.company;
   var description = req.cookies.description;
-  res.render('create/profile', {id: id, company: company, description: description});
+  userCollection.findOne({user: id}, function(err, record) {
+    var answer = record.answer;
+    res.render('create/profile', {id: id, company: company, description: description, answer: answer});
+  });
 });
 
 // update profile details
@@ -66,7 +68,6 @@ router.post('/update', function(req, res, next) {
   var password = req.body.password;
   var confirm = req.body.confirm;
   var hash = bcrypt.hashSync(req.body.password, 10);
-  var question = req.body.question;
   var answer = req.body.answer;
 
   if (handle !== id) {
@@ -77,9 +78,9 @@ router.post('/update', function(req, res, next) {
         errorsList.push(handleErr);
       }
       if (errorsList.length !== 0) {
-        res.render('create/profile', {errors: errorsList, id: id, company: company, description: description});
+        res.render('create/profile', {errors: errorsList, id: id, company: company, description: description, answer: answer});
       } else {
-        userCollection.update({user: id}, {$set: {user: handle, password: hash}});
+        userCollection.update({user: id}, {$set: {user: handle, password: hash, answer: answer}});
         res.clearCookie("id");
         res.cookie("id", handle);
         res.redirect('/profile');
@@ -89,16 +90,15 @@ router.post('/update', function(req, res, next) {
     userCollection.findOne({user: handle}, function(err, record) {
       var errorsList = lib.errorGen(handle, password, confirm);
       if (errorsList.length !== 0) {
-        res.render('create/profile', {errors: errorsList, id: id, company: company, description: description, question: question, answer: answer});
+        res.render('create/profile', {errors: errorsList, id: id, company: company, description: description, answer: answer});
       } else {
-        userCollection.update({user: id}, {$set: {user: handle, password: hash, question: question, answer: answer}});
+        userCollection.update({user: id}, {$set: {user: handle, password: hash, answer: answer}});
         res.clearCookie("id");
         res.cookie("id", handle);
         res.redirect('/profile');
       }
     });
   }
-
 });
 
 module.exports = router;
