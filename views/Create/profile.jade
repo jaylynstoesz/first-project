@@ -1,0 +1,36 @@
+extends ../layout
+
+block content
+  .nav
+    a(href="/create") Tweet Dashboard
+    a(href="/logout") Log Out
+  div
+    form(action="/reset" method="post")
+      div
+        label(for="handle") Twitter handle:
+        input(type="text" name="handle" id="handle" value=id)
+        br
+      div
+        label(for="password") New Password:
+        input(type="password" name="password" id="password")
+        br
+      div
+        label(for="confirm") Retype new password:
+        input(type="password" name="confirm" id="confirm")
+        br
+      div
+        input(type="submit" name="submit" id="login" value="Update Login Information")
+  div
+    form(action="/details" method="post")
+      div
+        label(for="company") Company/Organization name:
+        input(type="text" name="company" id="company" value=company)
+        br
+      div
+        label(for="description") Enter up to three describing words for your company/organization, separated by commas:
+        input(type="text" name="description" id="description" value=description)
+      div
+        input(type="submit" name="submit" id="details" value="Update profile details")
+    if errors
+      for message in errors
+        p= message    

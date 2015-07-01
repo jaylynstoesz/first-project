@@ -139,7 +139,7 @@ label {
   float: left;
   text-align: center;
   background-color: rgb(85, 172, 238);
-  height: 50vh;
+  height: 40vh;
   /*position: relative;*/
 }
 
@@ -155,4 +155,8 @@ label {
   width: 100%;
   padding: 2.5%;
   background-color: rgb(85, 172, 238);
+}
+
+.red {
+  color: red;
 }

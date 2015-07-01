@@ -8,33 +8,33 @@ block content
     form(method="post" action="/signup")
       div
         label(for="handle") Twitter Handle: 
-        br
         span @ 
         input(type="text" name="handle" id="handle" value=handle)
+        br
       div
         label(for="password") Password:
-        br
         input(type="password" name="password" id="password")
+        br
       div
         label(for="confirm") Retype password:
-        br
         input(type="password" name="confirm" id="confirm")
+        br
       div
-        input(type="submit" name="submit" id="submit" value="Create Account")
+        input(type="submit" name="submit" id="login" value="Create Account")
   .right
     h2 Or log into an existing account
     form(method="post" action="/login")
       div
         label(for="handleEx") Twitter Handle: 
-        br
         span @ 
         input(type="text" name="handleEx" id="handleEx" value=handleEx)
+        br
       div
         label(for="passwordEx") Password:
-        br
         input(type="password" name="passwordEx" id="passwordEx")
+        br
       div
-        input(type="submit" name="submit" id="submit" value="Log In")
+        input(type="submit" name="submit" id="login" value="Log In")
   .center
     if errors
       for message in errors

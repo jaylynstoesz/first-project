@@ -26,7 +26,7 @@ router.post('/signup', function(req, res, next) {
     if (errorsList.length !== 0) {
       res.render('index', {errors: errorsList, handle: handle});
     } else {
-      res.cookie('user_name', handle);
+      res.cookie('id', handle);
       userCollection.insert({user: handle, password: hash});
       res.redirect('/create');
     }
@@ -42,7 +42,9 @@ router.post('/login', function(req, res, next) {
       res.render('index', {handleEx: handleEx, msg: "That Twitter handle doesn't match our records. Please try again."});
     } else {
       if (bcrypt.compareSync(passwordEx, record.password)) {
-        res.cookie('user_name', handleEx);
+        res.cookie('id', handleEx);
+        res.cookie('company', record.company);
+        res.cookie('description', record.description);
         res.redirect('/create');
       } else {
         res.render('index', {msg: "Oops! Your password didn't match. Please try again.", handleEx: handleEx});
