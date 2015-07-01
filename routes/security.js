@@ -2,7 +2,6 @@ var express = require('express');
 var router = express.Router();
 var lib = require('../lib/lib');
 var jsdom = require('jsdom');
-var dom = require('../public/javascripts/dom');
 var db = require('monk')(process.env.MONGOLAB_URI);
 var userCollection = db.get('allUsers');
 var bcrypt = require('bcryptjs');
