@@ -10,44 +10,6 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Twitter Project' });
 });
 
-// view security question
-router.get('/forgot', function(req, res, next) {
-  res.render('forgot');
-});
-
-// answer security question
-router.post('/forgot', function(req, res, next) {
-  var handle = req.body.handle;
-  var answer = req.body.answer;
-  userCollection.findOne({user: handle}, function(err, record) {
-    if (answer !== record.answer) {
-      res.render('forgot', {msg: "That is not the correct answer. Please try again."});
-    } else {
-      res.cookie("id", handle);
-      res.cookie('company', record.company);
-      res.cookie('description', record.description);
-      res.redirect('/reset');
-    }
-  });
-});
-
-// view password reset page
-router.get('/reset', function(req, res, next) {
-  res.render('reset');
-});
-
-// reset password and redirect to dashboard
-router.post('/reset', function(req, res, next) {
-  var id = req.cookies.id;
-  if (req.body.password.length < 8) {
-    res.render('reset', {msg: "Password must be at least 8 characters."});
-  } else {
-    var hash = bcrypt.hashSync(req.body.password, 10);
-    userCollection.update({user: id}, {$set: {user: id, password: hash}});
-    res.redirect('/create');
-  }
-});
-
 // post to signup page
 router.post('/signup', function(req, res, next) {
   var handle = req.body.handle;
@@ -89,6 +51,73 @@ router.post('/login', function(req, res, next) {
       }
     }
   });
+});
+
+
+// show profile page
+router.get('/profile', function(req, res, next) {
+  var id = req.cookies.id;
+  var company = req.cookies.company;
+  var description = req.cookies.description;
+  userCollection.findOne({user: id}, function(err, record) {
+    var answer = record.answer;
+    res.render('create/profile', {id: id, company: company, description: description, answer: answer});
+  });
+});
+
+// update profile details
+router.post('/details', function(req, res, next) {
+  var id = req.cookies.id;
+  var description = req.body.description;
+  var company = req.body.company;
+  res.clearCookie("company");
+  res.clearCookie("description");
+  res.cookie("company", company);
+  res.cookie("description", description);
+  userCollection.update({user: id}, {$set: {description: description, company: company }});
+  res.redirect('/profile');
+});
+
+// update login info
+router.post('/update', function(req, res, next) {
+  var handle = req.body.handle;
+  var id = req.cookies.id;
+  var description = req.cookies.description;
+  var company = req.cookies.company;
+  var password = req.body.password;
+  var confirm = req.body.confirm;
+  var hash = bcrypt.hashSync(req.body.password, 10);
+  var answer = req.body.answer;
+
+  if (handle !== id) {
+    userCollection.findOne({user: handle}, function(err, record) {
+      var errorsList = lib.errorGen(handle, password, confirm);
+      if (record !== null) {
+        var handleErr = "That handle is already taken.";
+        errorsList.push(handleErr);
+      }
+      if (errorsList.length !== 0) {
+        res.render('create/profile', {errors: errorsList, id: id, company: company, description: description, answer: answer});
+      } else {
+        userCollection.update({user: id}, {$set: {user: handle, password: hash, answer: answer}});
+        res.clearCookie("id");
+        res.cookie("id", handle);
+        res.redirect('/profile');
+      }
+    });
+  } else {
+    userCollection.findOne({user: handle}, function(err, record) {
+      var errorsList = lib.errorGen(handle, password, confirm);
+      if (errorsList.length !== 0) {
+        res.render('create/profile', {errors: errorsList, id: id, company: company, description: description, answer: answer});
+      } else {
+        userCollection.update({user: id}, {$set: {user: handle, password: hash, answer: answer}});
+        res.clearCookie("id");
+        res.cookie("id", handle);
+        res.redirect('/profile');
+      }
+    });
+  }
 });
 
 module.exports = router;
