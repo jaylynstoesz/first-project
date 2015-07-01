@@ -1,0 +1,18 @@
+extends layout
+
+block content
+  form(action="/forgot" method="post")
+    div
+      label(for="handle") Twitter Handle: 
+      span @ 
+      input(type="text" name="handle" id="handle")
+      br
+    div
+      p Your security question
+    div
+      label(for="answer") Your answer:
+      input(type="text" name="answer" id="answer")
+    div
+      input(type="submit" name="submit" id="login" value="Submit Answer")
+  if msg
+    p= msg

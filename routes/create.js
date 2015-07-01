@@ -10,6 +10,7 @@ var bcrypt = require('bcryptjs');
 
 /* GET Create page. */
 router.get('/create', function(req, res, next) {
+
   res.render('create/index');
 });
 
@@ -35,6 +36,7 @@ router.post('/create', function(req, res, next) {
   );
 });
 
+// show profile page
 router.get('/profile', function(req, res, next) {
   var id = req.cookies.id;
   var company = req.cookies.company;
@@ -42,6 +44,7 @@ router.get('/profile', function(req, res, next) {
   res.render('create/profile', {id: id, company: company, description: description});
 });
 
+// update profile details
 router.post('/details', function(req, res, next) {
   var id = req.cookies.id;
   var description = req.body.description;
@@ -54,7 +57,8 @@ router.post('/details', function(req, res, next) {
   res.redirect('/profile');
 });
 
-router.post('/reset', function(req, res, next) {
+// update login info
+router.post('/update', function(req, res, next) {
   var handle = req.body.handle;
   var id = req.cookies.id;
   var description = req.cookies.description;
@@ -62,6 +66,8 @@ router.post('/reset', function(req, res, next) {
   var password = req.body.password;
   var confirm = req.body.confirm;
   var hash = bcrypt.hashSync(req.body.password, 10);
+  var question = req.body.question;
+  var answer = req.body.answer;
 
   if (handle !== id) {
     userCollection.findOne({user: handle}, function(err, record) {
@@ -83,9 +89,9 @@ router.post('/reset', function(req, res, next) {
     userCollection.findOne({user: handle}, function(err, record) {
       var errorsList = lib.errorGen(handle, password, confirm);
       if (errorsList.length !== 0) {
-        res.render('create/profile', {errors: errorsList, id: id, company: company, description: description});
+        res.render('create/profile', {errors: errorsList, id: id, company: company, description: description, question: question, answer: answer});
       } else {
-        userCollection.update({user: id}, {$set: {user: handle, password: hash}});
+        userCollection.update({user: id}, {$set: {user: handle, password: hash, question: question, answer: answer}});
         res.clearCookie("id");
         res.cookie("id", handle);
         res.redirect('/profile');
