@@ -9,7 +9,7 @@ var bcrypt = require('bcryptjs');
 
 // view security question
 router.get('/forgot', function(req, res, next) {
-  res.render('forgot');
+  res.render('forgot', {title: "TweetHelper"});
 });
 
 // answer security question
@@ -17,16 +17,16 @@ router.post('/forgot', function(req, res, next) {
   var handle = req.body.handle;
   var answer = req.body.answer;
   if (!handle) {
-    res.render('forgot', {msg: "Please enter your Twitter handle."});
+    res.render('forgot', {msg: "Please enter your Twitter handle.", title: "TweetHelper"});
   }
   if (!answer) {
-    res.render('forgot', {msg: "Please answer the security question.", handle: handle});
+    res.render('forgot', {msg: "Please answer the security question.", handle: handle, title: "TweetHelper"});
   } else {
     userCollection.findOne({user: handle}, function(err, record) {
       if (!record || !record.answer) {
-        res.render('forgot', {msg: "A security question has not been set up for this account."});
+        res.render('forgot', {msg: "A security question has not been set up for this account.", title: "TweetHelper"});
       } else if (answer !== record.answer) {
-        res.render('forgot', {msg: "That is not the correct answer. Please try again.", handle: handle});
+        res.render('forgot', {msg: "That is not the correct answer. Please try again.", handle: handle, title: "TweetHelper"});
       } else {
         res.cookie("id", handle);
         res.cookie('company', record.company);
@@ -39,14 +39,14 @@ router.post('/forgot', function(req, res, next) {
 
 // view password reset page
 router.get('/reset', function(req, res, next) {
-  res.render('reset');
+  res.render('reset', {title: "TweetHelper"});
 });
 
 // reset password and redirect to dashboard
 router.post('/reset', function(req, res, next) {
   var id = req.cookies.id;
   if (req.body.password.length < 8) {
-    res.render('reset', {msg: "Password must be at least 8 characters."});
+    res.render('reset', {msg: "Password must be at least 8 characters.", title: "TweetHelper"});
   } else {
     var hash = bcrypt.hashSync(req.body.password, 10);
     userCollection.update({user: id}, {$set: {user: id, password: hash}});

@@ -76,21 +76,27 @@ p {
   display: inline-block;
   text-align: left;
   width: 10%;
-  padding: 10px;
+  padding: 5px;
 }
 
 .navRight {
   display: inline-block;
   width: 85%;
   text-align: right;
-  padding: 10px;
+  padding: 5px;
 }
 
 .nav a{
   display: inline-block;
   width: auto;
   text-align: right;
-  margin-left: 5%;
+  padding: 10px;
+}
+
+.nav a:hover {
+  background-color: rgb(102, 117, 127);
+  color: rgb(255, 255, 255);
+  border-radius: 5px;
 }
 /*, .container>a  */
 
@@ -143,6 +149,7 @@ p {
   padding: 2%;
   width: 30%;
   display: inline-table;
+  text-align: center;
 }
 
 #loginSubmit {
@@ -160,8 +167,9 @@ p {
 
 #results {
   background-color: rgb(85, 172, 238);
-  height: 58vh;
+  height: auto;
   padding-top: 5vh;
+  padding-bottom: 5vh;
 }
 
 .container a:hover {

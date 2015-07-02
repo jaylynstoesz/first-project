@@ -3,13 +3,13 @@ extends ../layout
 block content
   .nav
     .navLeft
-      a(href="#") #{company}
+      a(href="https://twitter.com/" + id target="_blank") #{company}
     .navRight
       a(href="/profile") Edit Profile
       a(href="/create") Create Tweet
       a(href="/logout") Log Out
   .main
-    h1 Welcome!
+    h1 Create a Tweet
     form(method="post" action="/create")
       div
         label#url(for="url") Enter a URL to get started: 
@@ -25,14 +25,13 @@ block content
       br
       #results
         if suggestions
-          p Add some hashtags to your Tweet
           for each in suggestions
             a.hashtag(href="#" id=each) ##{each}
 
   .sidebar
     p Preview and edit your Tweet:
     textarea(id="prevWindow" name="preview" maxLength="138")
-      !{title} 
+      !{articleTitle} 
     p !{urlTrim}
     p#charCount
     div#container
