@@ -1,12 +1,16 @@
 extends layout
 
 block content
-  form(action="/reset" method="post")
-    div
-      label(for="password") New password:
-      input(type="password" name="password" id="password")
-      br
-    div
-      input(type="submit" name="reset" id="reset" value="Reset password")
-  if msg
-    p= msg
+  .nav
+    .navRight
+      a(href="/") Home
+  .jumbo
+    form.reset(action="/reset" method="post")
+      .login
+        label(for="password") New password:
+        input(type="password" name="password" id="password")
+        br
+      .login
+        input(type="submit" name="reset" id="reset" value="Reset password")
+    if msg
+      p= msg

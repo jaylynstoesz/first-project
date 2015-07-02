@@ -2,39 +2,45 @@ extends ../layout
 
 block content
   .nav
-    a(href="/create") Tweet Dashboard
-    a(href="/logout") Log Out
-  div
-    form(action="/update" method="post")
-      div
-        label(for="handle") Twitter handle:
-        input(type="text" name="handle" id="handle" value=id)
-        br
-      div
-        label(for="answer") Security question: in what city were you born?
-        input(type="text" name="answer" id="answer" value=answer)
-        br
-      div
-        label(for="password") Password (required to update login information):
-        input(type="password" name="password" id="password")
-        br
-      div
-        label(for="confirm") Retype password:
-        input(type="password" name="confirm" id="confirm")
-        br
-      div
-        input(type="submit" name="submit" id="login" value="Update Login Information")
-  div
+    .navLeft
+      a(href="#") #{company}
+    .navRight
+      a(href="/profile") Edit Profile
+      a(href="/create") Create Tweet
+      a(href="/logout") Log Out
+  .sidebar#profile
+    h2 Profile
     form(action="/details" method="post")
-      div
+      .login
         label(for="company") Company/Organization name:
-        input(type="text" name="company" id="company" value=company)
         br
-      div
-        label(for="description") Enter some describing words for your company/organization, separated by commas (no spaces):
-        input(type="text" name="description" id="description" value=description)
-      div
+        input.profile(type="text" name="company" id="company" value=company)
+        br
+      .login
+        label(for="description") Enter some key words for your company/organization, separated by commas (no spaces):
+        br
+        input.profile(type="text" name="description" id="description" value=description)
+        br
+      .login
+        br
         input(type="submit" name="submit" id="details" value="Update profile details")
-    if errors
-      for message in errors
-        p= message    
+  .main#login
+    h2 Login information
+    form(action="/update" method="post")
+      .login
+        label(for="handle") Twitter handle:
+          input(type="text" name="handle" id="handle" value=id)
+      .login
+        label(for="answer") Security question: where were you born?
+          input(type="password" name="answer" id="answer" value=answer)
+      .login
+        label(for="password") Password (required to update login information):
+          input(type="password" name="password" id="password")
+      .login
+        label(for="confirm") Retype password:
+          input(type="password" name="confirm" id="confirm")
+      .login
+        input(type="submit" name="submit" id="loginSubmit" value="Update Login Information")
+      if errors
+        for message in errors
+          p= message    

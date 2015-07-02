@@ -16,16 +16,25 @@ router.get('/forgot', function(req, res, next) {
 router.post('/forgot', function(req, res, next) {
   var handle = req.body.handle;
   var answer = req.body.answer;
-  userCollection.findOne({user: handle}, function(err, record) {
-    if (answer !== record.answer) {
-      res.render('forgot', {msg: "That is not the correct answer. Please try again."});
-    } else {
-      res.cookie("id", handle);
-      res.cookie('company', record.company);
-      res.cookie('description', record.description);
-      res.redirect('/reset');
-    }
-  });
+  if (!handle) {
+    res.render('forgot', {msg: "Please enter your Twitter handle."});
+  }
+  if (!answer) {
+    res.render('forgot', {msg: "Please answer the security question.", handle: handle});
+  } else {
+    userCollection.findOne({user: handle}, function(err, record) {
+      if (!record || !record.answer) {
+        res.render('forgot', {msg: "A security question has not been set up for this account."});
+      } else if (answer !== record.answer) {
+        res.render('forgot', {msg: "That is not the correct answer. Please try again.", handle: handle});
+      } else {
+        res.cookie("id", handle);
+        res.cookie('company', record.company);
+        res.cookie('description', record.description);
+        res.redirect('/reset');
+      }
+    });
+  }
 });
 
 // view password reset page

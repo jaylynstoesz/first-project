@@ -2,8 +2,12 @@ extends ../layout
 
 block content
   .nav
-    a(href="/profile") Edit Profile
-    a(href="/logout") Log Out
+    .navLeft
+      a(href="#") #{company}
+    .navRight
+      a(href="/profile") Edit Profile
+      a(href="/create") Create Tweet
+      a(href="/logout") Log Out
   .main
     h1 Welcome!
     form(method="post" action="/create")

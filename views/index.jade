@@ -1,42 +1,38 @@
 extends layout
 
 block content
-  .main
-    h1 Welcome to TweetHelper!
+  .banner Welcome to TweetHelper!
   .left
-    h2 Create a new account
+    h3 Create a new account
     form(method="post" action="/signup")
-      div
-        label(for="handle") Twitter Handle: 
-        span @ 
-        input(type="text" name="handle" id="handle" value=handle)
+      .login
+        label(for="handle") Twitter Handle: @ 
+          input(type="text" name="handle" id="handle" value=handle)
         br
-      div
+      .login
         label(for="password") Password:
-        input(type="password" name="password" id="password")
+          input(type="password" name="password" id="password")
         br
-      div
+      .login
         label(for="confirm") Retype password:
-        input(type="password" name="confirm" id="confirm")
+          input(type="password" name="confirm" id="confirm")
         br
-      div
+      .login
         input(type="submit" name="submit" id="login" value="Create Account")
   .right
-    h2 Or log into an existing account
+    h3 Log into an existing account
     form(method="post" action="/login")
-      div
-        label(for="handleEx") Twitter Handle: 
-        span @ 
-        input(type="text" name="handleEx" id="handleEx" value=handleEx)
+      .login
+        label(for="handleEx") Twitter Handle: @  
+          input(type="text" name="handleEx" id="handleEx" value=handleEx)
         br
-      div
+      .login
         label(for="passwordEx") Password:
-        input(type="password" name="passwordEx" id="passwordEx")
+          input(type="password" name="passwordEx" id="passwordEx")
         br
-      div
+      .login
+        a#forgot(href="/forgot") Forgot password?     
         input(type="submit" name="submit" id="login" value="Log In")
-      div
-        a(href="/forgot") Forgot password?
   .center
     if errors
       for message in errors

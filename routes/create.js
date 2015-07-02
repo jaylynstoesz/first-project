@@ -10,7 +10,12 @@ var bcrypt = require('bcryptjs');
 
 /* GET Create page. */
 router.get('/create', function(req, res, next) {
-  res.render('create/index');
+  var company = req.cookies.company;
+  if (!company) {
+    res.render('create/index');
+  } else {
+    res.render('create/index', {company: company});
+  }
 });
 
 // Log out
@@ -26,11 +31,13 @@ router.post('/create', function(req, res, next) {
   var article = req.body.article;
   var url = req.body.url;
   var urlTrim = url.substring(0, 30) + "...";
+  var company = req.cookies.company;
+
   jsdom.env(
     url,
     ["http://code.jquery.com/jquery.js"],
     function (errors, window) {
-      res.render('create/index', {article: article, suggestions: (lib.getKeywords(window.$("p").text())), url: url, urlTrim: urlTrim, title: window.$("title").text()});
+      res.render('create/index', {article: article, suggestions: (lib.getKeywords(window.$("p").text())), url: url, urlTrim: urlTrim, company: company, title: window.$("title").text()});
     }
   );
 });
