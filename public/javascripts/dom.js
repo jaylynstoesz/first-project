@@ -6,24 +6,20 @@ window.twttr = (function(d, s, id) {
   js.id = id;
   js.src = "https://platform.twitter.com/widgets.js";
   fjs.parentNode.insertBefore(js, fjs);
-
   t._e = [];
   t.ready = function(f) {
     t._e.push(f);
   };
-
   return t;
 }(document, "script", "twitter-wjs"));
 
 var results = document.getElementById("results").childNodes;
 var prevWindow = document.getElementById("prevWindow");
 var charCount = document.getElementById("charCount");
-charCount.innerHTML = 138 - prevWindow.innerHTML.length + " characters remaining";
+charCount.innerHTML = 117 - prevWindow.innerHTML.length + " characters remaining";
 var tweet = document.getElementById("tweet");
 var done = document.getElementById("done");
 var url = document.getElementById("url");
-
-// var tweet = document.getElementById("tweet-container");
 
 function getCookies(input) {
   var results = input.replace(/ /g, "").split(";");
@@ -46,15 +42,14 @@ for (var i = 0; i < results.length; i++) {
     }
   }
   results[i].onclick = function() {
-    if (prevWindow.value.length + this.id.length > 138) {
+    if (prevWindow.value.length + this.id.length > 117) {
       console.log(this.id.length);
       this.onclick = function() { return false; };
       prevWindow.innerHTML = prevWindow.value;
     } else {
       prevWindow.value += " #" + this.id;
-      tweet.setAttribute("data-text", prevWindow.value);
       prevWindow.innerHTML = prevWindow.value;
-      charCount.innerHTML = 138 - prevWindow.value.length + " characters remaining";
+      charCount.innerHTML = 117 - prevWindow.value.length + " characters remaining";
       tags += this.id + ",";
       this.style.backgroundColor = "silver";
       if (prevWindow.value.length >= 128) {
@@ -69,9 +64,9 @@ for (var i = 0; i < results.length; i++) {
 }
 
 prevWindow.onkeyup = function () {
-  charCount.innerHTML = 138 - this.value.length + " characters remaining";
+  charCount.innerHTML = 117 - this.value.length + " characters remaining";
   tweet.setAttribute("data-text", prevWindow.value);
-  if (this.value.length >= 128) {
+  if (this.value.length >= 107) {
     charCount.style.color = "red";
     console.log(charCount);
   } else {
@@ -90,7 +85,6 @@ done.onclick = function () {
     document.getElementById('container'),
     {
       text: prevWindow.value,
-      // href: url.value
     }
   );
 };
