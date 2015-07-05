@@ -1,0 +1,14 @@
+extends ../layout
+
+block content
+  .nav
+    .navLeft
+      a(href="https://twitter.com/" + id target="_blank") #{company}
+    .navRight
+      a(href="/profile") Edit Profile
+      a(href="/create") Create Tweet
+      a(href="/logout") Log Out
+  .main
+    //- ul.terms Related Keywords:
+    //-   for each in terms
+    //-     li= each

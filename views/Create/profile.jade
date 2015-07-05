@@ -24,6 +24,8 @@ block content
       .login
         br
         input(type="submit" name="submit" id="details" value="Update profile details")
+      if msg
+        p= msg
   .main#login
     h2 Login information
     form(action="/update" method="post")
@@ -43,4 +45,6 @@ block content
         input(type="submit" name="submit" id="loginSubmit" value="Update Login Information")
       if errors
         for message in errors
-          p= message    
+          p= message
+      if msg
+        p= msg

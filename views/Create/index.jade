@@ -12,7 +12,7 @@ block content
     h1 Create a Tweet
     form(method="post" action="/create")
       div
-        label#url(for="url") Enter a URL to get started: 
+        label#urlLabel(for="url") Enter an article URL to get started: 
         br
         br
         div
@@ -30,13 +30,19 @@ block content
 
   .sidebar
     p Preview and edit your Tweet:
-    textarea(id="prevWindow" name="preview" maxLength="138")
-      !{articleTitle} 
+    form(method="post" action="/tweet")
+      textarea(id="prevWindow" name="preview" maxLength="138" cols="40")
+        !{articleTitle}
+      input(type="button" name="done" id="done" value="Done")
     p !{urlTrim}
     p#charCount
-    div#container
-    //- a.twitter-share-button(href="https://twitter.com/share" data-count="none" data-size="large" id="tweet-container")
+    div#container Container
+    //- a.twitter-share-button#twitter(href="https://twitter.com/share" data-size="large" data-count="none" data-url=url) Tweet
+    //- script window.twttr = (function(d, s, id) {var js, fjs = d.getElementsByTagName(s)[0],t = window.twttr || {}; if (d.getElementById(id)) return t;js = d.createElement(s);js.id = id;js.src = "https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js, fjs);t._e = [];t.ready = function(f) {t._e.push(f);};return t;}(document, "script", "twitter-wjs"));
     
-  script(src='/javascripts/dom.js'); 
+    //- script !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
+    script(src='/javascripts/dom.js'); 
+
+
       
     

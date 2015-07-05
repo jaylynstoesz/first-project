@@ -149,7 +149,7 @@ p {
   padding: 2%;
   width: 30%;
   display: inline-table;
-  text-align: center;
+  text-align: left;
 }
 
 #loginSubmit {
@@ -199,7 +199,7 @@ p {
   left: 10%;
 }
 
-#url {
+#urlLabel, #url {
   transform: scale(2);
   width: 30%;
   margin-left: auto;
@@ -221,4 +221,12 @@ p {
 #submit {
   transform: scale(1.2);
   bottom: 0;
+}
+
+.terms {
+  font-size: 18px;
+  text-align: left;
+  background-color: blue;
+  width: 20%;
+  list-style-type: square;
 }

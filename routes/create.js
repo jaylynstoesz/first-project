@@ -6,7 +6,8 @@ var jsdom = require('jsdom');
 var db = require('monk')(process.env.MONGOLAB_URI);
 var userCollection = db.get('allUsers');
 var bcrypt = require('bcryptjs');
-
+var unirest = require('unirest');
+var token = process.env.THESAURUS_TOKEN;
 
 /* GET Create page. */
 router.get('/create', function(req, res, next) {
@@ -43,6 +44,15 @@ router.post('/create', function(req, res, next) {
     }
   );
 });
+
+router.get('/browse', function(req, res, next) {
+  var description = req.cookies.description.split("%2C")[0].split(",");
+    // unirest.get('http://words.bighugelabs.com/api/2/' + token + "/" + description[i] + "/json")
+    //   .end(function (response) {
+    //   });
+  res.render('create/browse', {title: "TweetHelper"});
+});
+
 
 
 module.exports = router;
