@@ -14,7 +14,7 @@ router.get('/forgot', function(req, res, next) {
 
 // answer security question
 router.post('/forgot', function(req, res, next) {
-  var handle = req.body.handle;
+  var handle = req.body.handle.trim();
   var answer = req.body.answer;
   if (!handle) {
     res.render('forgot', {msg: "Please enter your Twitter handle.", title: "TweetHelper"});

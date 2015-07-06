@@ -12,7 +12,7 @@ router.get('/', function(req, res, next) {
 
 // post to signup page
 router.post('/signup', function(req, res, next) {
-  var handle = req.body.handle;
+  var handle = req.body.handle.trim();
   var password = req.body.password;
   var confirm = req.body.confirm;
   var hash = bcrypt.hashSync(req.body.password, 10);
@@ -35,7 +35,7 @@ router.post('/signup', function(req, res, next) {
 
 // log into existing account
 router.post('/login', function(req, res, next) {
-  var handleEx = req.body.handleEx;
+  var handleEx = req.body.handleEx.trim();
   var passwordEx = req.body.passwordEx;
   userCollection.findOne({user: handleEx}, function (err, record) {
     if (record === null) {
@@ -60,6 +60,12 @@ router.get('/profile', function(req, res, next) {
   var description = req.cookies.description;
   userCollection.findOne({user: id}, function(err, record) {
     var answer = record.answer;
+    if (company === "undefined") {
+      company = "";
+    }
+    if (description === "undefined") {
+      description = "";
+    }
     res.render('create/profile', {id: id, company: company, description: description, answer: answer, title: "TweetHelper"});
   });
 });
@@ -82,15 +88,17 @@ router.post('/brand', function(req, res, next) {
   var form = req.body.brand;
   var id = req.cookies.id;
   var brandList = [];
-  for (var i = 1; i < form.length; i++) {
+  for (var i = 0; i < form.length; i++) {
     var word = form[i];
     brandList.push(word);
   }
   userCollection.findOne({user: id}, function(err, record) {
-    var things = record.brand;
-    for (var i = 0; i < things.length; i++) {
-      var word = things[i];
-      brandList.push(word);
+    var brand = record.brand;
+    if (brand) {
+      for (var i = 0; i < brand.length; i++) {
+        var word = brand[i];
+        brandList.push(word);
+      }
     }
     userCollection.update({user: id}, {$set: {brand: brandList}});
     res.clearCookie("brand");
@@ -100,7 +108,7 @@ router.post('/brand', function(req, res, next) {
 
 // update login info
 router.post('/update', function(req, res, next) {
-  var handle = req.body.handle;
+  var handle = req.body.handle.trim();
   var id = req.cookies.id;
   var description = req.cookies.description;
   var company = req.cookies.company;

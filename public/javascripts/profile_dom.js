@@ -10,7 +10,6 @@ function getCookies(input) {
 }
 
 var bcookie = getCookies(document.cookie).brand;
-var brand = getCookies(document.cookie).brand.split(",");
 var company = getCookies(document.cookie).company.split("%20").join(" ");
 var description = getCookies(document.cookie).description.split("%2C");
 var id = getCookies(document.cookie).id;
@@ -21,6 +20,7 @@ if (!bcookie) {
   brandSubmit.disabled = "true";
   container.innerHTML = "Looks like you don't have any recent tags! Post an article to add tags to your brand profile.";
 }
+var brand = getCookies(document.cookie).brand.split(",");
 
 var list = [];
 for (var i = 0; i < brand.length; i++) {
