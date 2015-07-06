@@ -89,6 +89,7 @@ router.post('/brand', function(req, res, next) {
   var id = req.cookies.id;
   var brandList = [];
   for (var i = 0; i < form.length; i++) {
+
     var word = form[i];
     brandList.push(word);
   }
@@ -101,7 +102,7 @@ router.post('/brand', function(req, res, next) {
       }
     }
     userCollection.update({user: id}, {$set: {brand: brandList}});
-    res.clearCookie("brand");
+    // res.clearCookie("brand");
     res.redirect('/profile');
   });
 });
