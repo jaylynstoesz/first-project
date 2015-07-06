@@ -45,13 +45,13 @@ router.post('/create', function(req, res, next) {
   );
 });
 
-router.get('/browse', function(req, res, next) {
-  var description = req.cookies.description.split("%2C")[0].split(",");
-    // unirest.get('http://words.bighugelabs.com/api/2/' + token + "/" + description[i] + "/json")
-    //   .end(function (response) {
-    //   });
-  res.render('create/browse', {title: "TweetHelper"});
-});
+// router.get('/browse', function(req, res, next) {
+//   var description = req.cookies.description.split("%2C")[0].split(",");
+//     // unirest.get('http://words.bighugelabs.com/api/2/' + token + "/" + description[i] + "/json")
+//     //   .end(function (response) {
+//     //   });
+//   res.render('create/browse', {title: "TweetHelper"});
+// });
 
 
 

@@ -1,6 +1,7 @@
 extends ../layout
 
 block content
+  script !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
   .nav
     .navLeft
       a(href="https://twitter.com/" + id target="_blank") #{company}
@@ -26,7 +27,14 @@ block content
         input(type="submit" name="submit" id="details" value="Update profile details")
       if msg
         p= msg
+    h3 Recently used hashtags (click to add to your brand profile): 
+      #brand
+    form#brandUpdate(action="/brand" method="post")
+      label(for="brand")
+      br
+      input(type="submit" name="brand" id="brand" value="Update brand")
   .main#login
+
     h2 Login information
     form(action="/update" method="post")
       .login
@@ -48,3 +56,4 @@ block content
           p= message
       if msg
         p= msg
+  script(src='/javascripts/profile_dom.js'); 

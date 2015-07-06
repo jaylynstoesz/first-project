@@ -1,3 +1,6 @@
+// var db = require('monk')(process.env.MONGOLAB_URI);
+// var userCollection = db.get('allUsers');
+
 window.twttr = (function(d, s, id) {
   var js, fjs = d.getElementsByTagName(s)[0],
     t = window.twttr || {};
@@ -20,6 +23,8 @@ charCount.innerHTML = 117 - prevWindow.innerHTML.length + " characters remaining
 var tweet = document.getElementById("tweet");
 var done = document.getElementById("done");
 var url = document.getElementById("url");
+var urlTrim = document.getElementById("urlTrim");
+var submit = document.getElementById("submit");
 
 function getCookies(input) {
   var results = input.replace(/ /g, "").split(";");
@@ -32,6 +37,9 @@ function getCookies(input) {
   return obj;
 }
 var description = getCookies(document.cookie).description.split("%2C");
+var company = getCookies(document.cookie).company.split("%20").join(" ");
+var id = getCookies(document.cookie).id;
+
 
 var tags = "";
 for (var i = 0; i < results.length; i++) {
@@ -59,7 +67,6 @@ for (var i = 0; i < results.length; i++) {
         charCount.style.color = "black";
       }
     }
-  console.log(tags);
   };
 }
 
@@ -76,15 +83,29 @@ prevWindow.onkeyup = function () {
 
 done.onclick = function () {
   var container = document.getElementById("container");
-  var newDiv = document.createElement("div");
-  newDiv.innerHTML = prevWindow.value + " " + url.value;
-  container.appendChild(newDiv);
+  var foo = document.getElementById("foo");
+  var tweet = document.createElement("div");
+  var startOver = document.createElement("a");
+  startOver.setAttribute("id", "startOver");
+  startOver.href = "/create";
+  startOver.innerHTML = "Start Over";
+  tweet.setAttribute("class", "tweet");
+  tweet.innerHTML = company + " @" + id + "\n" + prevWindow.value + " " + url.value;
+  container.appendChild(tweet);
+  foo.appendChild(startOver);
 
   twttr.widgets.createShareButton(
     url.value,
     document.getElementById('container'),
     {
-      text: prevWindow.value,
+      text: prevWindow.value
     }
   );
+  prevWindow.style.color = "rgb(102, 117, 127)";
+  prevWindow.style.backgroundColor = "rgb(225, 232, 237)";
+  charCount.style.visibility = "hidden";
+  urlTrim.style.visibility = "hidden";
+  done.style.visibility = "hidden";
+  submit.value = "Start over with this article";
+  document.cookie = "brand=" + tags;
 };

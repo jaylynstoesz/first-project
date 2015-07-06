@@ -20,7 +20,7 @@ block content
         br
         br
       div
-        input(type="submit" name="submit" id="submit" value="Preview Tweet")
+        input(type="submit" name="submit" id="submit" value="Get Hashtags")
       br
       br
       #results
@@ -33,10 +33,11 @@ block content
     form(method="post" action="/tweet")
       textarea(id="prevWindow" name="preview" maxLength="138" cols="40")
         !{articleTitle}
-      input(type="button" name="done" id="done" value="Done")
-    p !{urlTrim}
+      input(type="button" name="done" id="done" value="Preview Tweet")
+    p#urlTrim !{urlTrim}
     p#charCount
     div#container
+    div#foo
     script(src='/javascripts/dom.js'); 
 
 

@@ -53,7 +53,6 @@ router.post('/login', function(req, res, next) {
   });
 });
 
-
 // show profile page
 router.get('/profile', function(req, res, next) {
   var id = req.cookies.id;
@@ -74,8 +73,29 @@ router.post('/details', function(req, res, next) {
   res.clearCookie("description");
   res.cookie("company", company);
   res.cookie("description", description);
-  userCollection.update({user: id}, {$set: {description: description, company: company, title: "TweetHelper"}});
+  userCollection.update({user: id}, {$set: {description: description, company: company}});
   res.redirect('/profile');
+});
+
+// update brand
+router.post('/brand', function(req, res, next) {
+  var form = req.body.brand;
+  var id = req.cookies.id;
+  var brandList = [];
+  for (var i = 1; i < form.length; i++) {
+    var word = form[i];
+    brandList.push(word);
+  }
+  userCollection.findOne({user: id}, function(err, record) {
+    var things = record.brand;
+    for (var i = 0; i < things.length; i++) {
+      var word = things[i];
+      brandList.push(word);
+    }
+    userCollection.update({user: id}, {$set: {brand: brandList}});
+    res.clearCookie("brand");
+    res.redirect('/profile');
+  });
 });
 
 // update login info
@@ -99,7 +119,7 @@ router.post('/update', function(req, res, next) {
       if (errorsList.length !== 0) {
         res.render('create/profile', {errors: errorsList, id: id, company: company, description: description, answer: answer, title: "TweetHelper"});
       } else {
-        userCollection.update({user: id}, {$set: {user: handle, password: hash, answer: answer, title: "TweetHelper"}});
+        userCollection.update({user: id}, {$set: {user: handle, password: hash, answer: answer}});
         res.clearCookie("id");
         res.cookie("id", handle);
         res.redirect('/profile');
@@ -111,7 +131,7 @@ router.post('/update', function(req, res, next) {
       if (errorsList.length !== 0) {
         res.render('create/profile', {errors: errorsList, id: id, company: company, description: description, answer: answer, title: "TweetHelper"});
       } else {
-        userCollection.update({user: id}, {$set: {user: handle, password: hash, answer: answer, title: "TweetHelper"}});
+        userCollection.update({user: id}, {$set: {user: handle, password: hash, answer: answer}});
         res.clearCookie("id");
         res.cookie("id", handle);
         res.redirect('/profile');

@@ -1,5 +1,5 @@
 body {
-  font: 20px "Trebuchet MS", Helvetica, sans-serif;
+  font: 19px "Lucida Sans Unicode", "Lucida Grande", sans-serif;
   background-image: url("http://www.wordstream.com/images/increase-traffic-to-your-website-social-media.jpg");
   background-position: top;
   background-repeat: no-repeat;
@@ -118,13 +118,13 @@ p {
   height: 100vh;
   display: inline-table;
   background-color: white;
+  align-content: center;
 }
 
 .hashtag {
   display: inline-block;
   width: auto;
   margin: 10px;
-  /*background-color: pink;*/
   border: 2px solid rgb(102, 117, 127);
   border-radius: 5px;
   background-color: rgb(255, 255, 255);
@@ -161,8 +161,9 @@ p {
   width: 61%;
 }
 
-.container {
-  padding-top: 10%;
+#container {
+  width: 420px;
+  height: auto;
 }
 
 #results {
@@ -170,21 +171,6 @@ p {
   height: auto;
   padding-top: 5vh;
   padding-bottom: 5vh;
-}
-
-.container a:hover {
-  background-color: rgb(102, 117, 127);
-  color: rgb(255, 255, 255);
-  border: none;
-}
-
-.container a {
-  background-color: white;
-  border: 2px solid black;
-  border-radius: 5px;
-  display: inline-block;
-  padding: 10px;
-  color: black;
 }
 
 .reset {
@@ -206,21 +192,41 @@ p {
   margin-right: auto;
 }
 
-#prevWindow {
+#prevWindow, .tweet {
   display: block;
   border: 1px solid rgb(102, 117, 127);
   box-shadow: 3px 3px 3px rgb(102, 117, 127);
-  width: 86%;
+  width: 75%;
   height: 15vh;
-  margin: 5%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10px;
+  margin-bottom: 10px;
   font-size: 20px;
   border-radius: 3px;
   padding: 10px;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+.tweet {
+  height: auto;
+}
+
+#done, #twitter-widget-0 {
+  width: 30%;
+  margin-left: 35%;
 }
 
 #submit {
-  transform: scale(1.2);
   bottom: 0;
+}
+
+#startOver {
+  display: block;
+  width: 100%;
+  text-align: center;
+  margin-top: 10vh;
 }
 
 .terms {
