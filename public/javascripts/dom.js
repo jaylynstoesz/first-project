@@ -1,6 +1,3 @@
-// var db = require('monk')(process.env.MONGOLAB_URI);
-// var userCollection = db.get('allUsers');
-
 window.twttr = (function(d, s, id) {
   var js, fjs = d.getElementsByTagName(s)[0],
     t = window.twttr || {};
@@ -39,7 +36,6 @@ function getCookies(input) {
 var description = getCookies(document.cookie).description.split("%2C");
 var company = getCookies(document.cookie).company.split("%20").join(" ");
 var id = getCookies(document.cookie).id;
-
 
 var tags = "";
 for (var i = 0; i < results.length; i++) {
@@ -83,7 +79,7 @@ prevWindow.onkeyup = function () {
 
 done.onclick = function () {
   var container = document.getElementById("container");
-  var foo = document.getElementById("foo");
+  var show = document.getElementById("show");
   var tweet = document.createElement("div");
   var startOver = document.createElement("a");
   startOver.setAttribute("id", "startOver");
@@ -92,8 +88,7 @@ done.onclick = function () {
   tweet.setAttribute("class", "tweet");
   tweet.innerHTML = company + " @" + id + "\n" + prevWindow.value + " " + url.value;
   container.appendChild(tweet);
-  foo.appendChild(startOver);
-
+  show.appendChild(startOver);
   twttr.widgets.createShareButton(
     url.value,
     document.getElementById('container'),

@@ -2,7 +2,6 @@ var express = require('express');
 var router = express.Router();
 var lib = require('../lib/lib');
 var jsdom = require('jsdom');
-// var dom = require('../public/javascripts/dom');
 var db = require('monk')(process.env.MONGOLAB_URI);
 var userCollection = db.get('allUsers');
 var bcrypt = require('bcryptjs');
@@ -25,17 +24,17 @@ router.get('/logout', function(req, res, next) {
   res.clearCookie('id');
   res.clearCookie('company');
   res.clearCookie('description');
+  res.clearCookie('brand');
   res.render('create/logout', {title: "TweetHelper"});
 });
 
-// Post key words
+// Post key words to Create Tweet dashboard
 router.post('/create', function(req, res, next) {
   var article = req.body.article;
+  var company = req.cookies.company;
   var id = req.cookies.id;
   var url = req.body.url;
   var urlTrim = url.substring(0, 30) + "...";
-  var company = req.cookies.company;
-
   jsdom.env(
     url,
     ["http://code.jquery.com/jquery.js"],
@@ -45,14 +44,9 @@ router.post('/create', function(req, res, next) {
   );
 });
 
+// Get browse page (later feature)
 // router.get('/browse', function(req, res, next) {
-//   var description = req.cookies.description.split("%2C")[0].split(",");
-//     // unirest.get('http://words.bighugelabs.com/api/2/' + token + "/" + description[i] + "/json")
-//     //   .end(function (response) {
-//     //   });
 //   res.render('create/browse', {title: "TweetHelper"});
 // });
-
-
 
 module.exports = router;

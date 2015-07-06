@@ -93,13 +93,6 @@ p {
   padding: 10px;
 }
 
-.nav a:hover {
-  background-color: rgb(102, 117, 127);
-  color: rgb(255, 255, 255);
-  border-radius: 5px;
-}
-/*, .container>a  */
-
 .main {
   background-color: white;
   width: 70%;
@@ -137,6 +130,16 @@ p {
   color: rgb(255, 255, 255);
 }
 
+input.hashtag {
+  width: auto;
+  text-align: center;
+  font-size: 20px;
+  background-color: rgb(85, 172, 238);
+  color: white;
+  border: 2px solid white;
+  border-radius: 5px;
+}
+
 .jumbo {
   text-align: center;
   width: 100%;
@@ -152,7 +155,7 @@ p {
   text-align: left;
 }
 
-#loginSubmit {
+#loginSubmit, #createSubmit {
   width: auto;
 }
 
@@ -226,7 +229,7 @@ p {
   display: block;
   width: 100%;
   text-align: center;
-  margin-top: 10vh;
+  margin-top: 2vh;
 }
 
 .terms {
@@ -236,3 +239,19 @@ p {
   width: 20%;
   list-style-type: square;
 }
+
+#logout {
+  padding-top: 25vh;
+}
+
+/* Browse page (later feature)
+.bubbleChart {
+  min-width: 100px;
+  max-width: 700px;
+  height: 700px;
+  margin: 0 auto;
+}
+
+.bubbleChart svg{
+  background: #000000;
+}*/

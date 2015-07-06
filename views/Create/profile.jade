@@ -13,12 +13,12 @@ block content
     h2 Profile
     form(action="/details" method="post")
       .login
-        label(for="company") Company/Organization name:
+        label(for="company") Name:
         br
         input.profile(type="text" name="company" id="company" value=company)
         br
       .login
-        label(for="description") Enter some key words for your company/organization, separated by commas (no spaces):
+        label(for="description") Enter some key words for your company, organization, or personal brand separated by commas (no spaces):
         br
         input.profile(type="text" name="description" id="description" value=description)
         br
@@ -27,14 +27,14 @@ block content
         input(type="submit" name="submit" id="details" value="Update profile details")
       if msg
         p= msg
-    h3 Recently used hashtags (click to add to your brand profile): 
-      #brand
+    #createBrand
+      h3 Recently used hashtags (click the tags below to add to your brand profile): 
+      #container
     form#brandUpdate(action="/brand" method="post")
-      label(for="brand")
+      label(for="submit")
       br
-      input(type="submit" name="brand" id="brand" value="Update brand")
+      input(type="submit" name="submit" id="brandSubmit" value="Update brand")
   .main#login
-
     h2 Login information
     form(action="/update" method="post")
       .login
@@ -56,4 +56,4 @@ block content
           p= message
       if msg
         p= msg
-  script(src='/javascripts/profile_dom.js'); 
+  script(src='/javascripts/profile_dom.js')

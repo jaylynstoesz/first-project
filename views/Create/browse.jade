@@ -1,6 +1,19 @@
 extends ../layout
 
 block content
+  link(href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,600,200italic,600italic&subset=latin,vietnamese' rel='stylesheet' type='text/css')
+  script(src="/javascripts/bubbles.js")
+  script(src="http://phuonghuynh.github.io/js/bower_components/jquery/dist/jquery.min.js")
+  script(src="http://phuonghuynh.github.io/js/bower_components/d3/d3.min.js")
+  script(src="http://phuonghuynh.github.io/js/bower_components/d3-transform/src/d3-transform.js")
+  script(src="http://phuonghuynh.github.io/js/bower_components/cafej/src/extarray.js")
+  script(src="http://phuonghuynh.github.io/js/bower_components/cafej/src/misc.js")
+  script(src="http://phuonghuynh.github.io/js/bower_components/cafej/src/micro-observer.js")
+  script(src="http://phuonghuynh.github.io/js/bower_components/microplugin/src/microplugin.js")
+  script(src="http://phuonghuynh.github.io/js/bower_components/bubble-chart/src/bubble-chart.js")
+  script(src="http://phuonghuynh.github.io/js/bower_components/bubble-chart/src/plugins/central-click/central-click.js")
+  script(src="http://phuonghuynh.github.io/js/bower_components/bubble-chart/src/plugins/lines/lines.js")
+  script(src="index.js")
   .nav
     .navLeft
       a(href="https://twitter.com/" + id target="_blank") #{company}
@@ -9,6 +22,4 @@ block content
       a(href="/create") Create Tweet
       a(href="/logout") Log Out
   .main
-    //- ul.terms Related Keywords:
-    //-   for each in terms
-    //-     li= each
+    div.bubbleChart
