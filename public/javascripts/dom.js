@@ -33,16 +33,25 @@ function getCookies(input) {
   }
   return obj;
 }
-var description = getCookies(document.cookie).description.split("%2C");
-var company = getCookies(document.cookie).company.split("%20").join(" ");
+var description = "";
+var company = "";
+if (getCookies(document.cookie).description) {
+  description = getCookies(document.cookie).description.split("%2C");
+}
+if (getCookies(document.cookie).company) {
+  company = getCookies(document.cookie).company.split("%20").join(" ");
+}
+
 var id = getCookies(document.cookie).id;
 
 var tags = "";
 for (var i = 0; i < results.length; i++) {
-  for (var j = 0; j < description.length; j++) {
-    if (results[i].id === description[j]) {
-      results[i].style.backgroundColor = "rgb(255, 255, 153)";
-      results[i].style.color = "black";
+  if (description) {
+    for (var j = 0; j < description.length; j++) {
+      if (results[i].id === description[j]) {
+        results[i].style.backgroundColor = "rgb(255, 255, 153)";
+        results[i].style.color = "black";
+      }
     }
   }
   results[i].onclick = function() {
