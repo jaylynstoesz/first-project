@@ -54,4 +54,9 @@ router.post('/reset', function(req, res, next) {
   }
 });
 
+router.get('/delete', function(req, res, next) {
+  var id = req.cookies.id;
+  userCollection.remove({user: id});
+});
+
 module.exports = router;
