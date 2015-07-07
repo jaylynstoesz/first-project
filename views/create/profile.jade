@@ -36,7 +36,7 @@ block content
       br
       input(type="submit" name="submit" id="brandSubmit" value="Update brand")
   .main#login
-    h2 Login information
+    h2 Login information CHANGED THINGS!!!!
     form(action="/update" method="post")
       .login
         label(for="handle") Twitter handle:
@@ -57,4 +57,7 @@ block content
           p= message
       if msg
         p= msg
+    br
+    br
+    a(href="/delete") Delete Profile
   script(src='/javascripts/profile_dom.js')
