@@ -3,6 +3,9 @@
 ## Production link
 https://stark-savannah-6732.herokuapp.com
 
+## YouTube link
+http://youtu.be/ZUaFttBc8a8
+
 ## Overview
 TweetHelper is a web app in which users can input the URL to any article page to view keywords from that article as hashtags. The user can then compose a custom tagged and linked Tweet for that article and post directly from the app. From there, the app builds a brand profile for the user as they post articles from the app.
 
